@@ -1,6 +1,7 @@
 // Dependencies
 const express = require('express')
 const mongoose = require('mongoose')
+const articlesRouter = require('./controllers/Articles')
 const {info, error} = require('./utils/logger')
 const {NODE_ENV, MONGO_DB_URI, MONGO_DB_URI_TEST} = require('./utils/config')
 
@@ -14,4 +15,6 @@ mongoose
     .catch(e => error(e))
 
 const app = express()
+app.use(express.json())
+app.use('/api/articles', articlesRouter)
 module.exports = app
